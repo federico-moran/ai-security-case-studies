@@ -1,0 +1,11 @@
+# OS and editor files
+.DS_Store
+Thumbs.db
+.vscode/
+
+# Office lock files
+~$*
+
+# Secrets: never commit API keys
+.env
+secrets/
