@@ -6,15 +6,21 @@ _One or two sentences about me, in my own words: who I am and what I do._
 
 ## Case studies
 
-| Case study | System | Methods | Status |
-|---|---|---|---|
-| [Vroomi AI Assistant](vroomi/) | Internal LLM assistant that answers policy questions and books, cancels and lists rides | STRIDE threat model, OWASP Top 10 for LLM Applications (2026), live testing | In progress |
+| Case study | System | Methods | Course | Status |
+|---|---|---|---|---|
+| [Vroomi AI Assistant](vroomi/) | Internal LLM assistant that answers policy questions and books, cancels and lists rides | STRIDE threat model, OWASP Top 10 for LLM Applications (2026), live testing | AISF Level 1 capstone | In progress |
 
-## Training
+## Training: AI Security Fundamentals
 
-The Vroomi case study is my capstone for [**AI Security Fundamentals (AISF), Level 1**](https://aisecurityfundamentals.com/curriculum) from [Mileva Security Labs](https://www.milev.ai/fundamentals). The course covers practical AI threat modelling, attacks, defences, governance and applied assessment.
+Several case studies here come from [**AI Security Fundamentals (AISF)**](https://aisecurityfundamentals.com/curriculum), a training programme from [Mileva Security Labs](https://www.milev.ai/fundamentals). Level 1 covers practical AI threat modelling, attacks, defences, governance and applied assessment.
 
-The Vroomi system and its lab notebooks belong to the course and are not reproduced here. This repository holds only my own analysis, write-up and diagrams.
+| Level | Status | Case studies |
+|---|---|---|
+| Level 1 | In progress | [Vroomi AI Assistant](vroomi/) (capstone) |
+| Level 2 | Planned | – |
+| Level 3 | Planned | – |
+
+Course systems and lab notebooks belong to the course and are not reproduced here. This repository holds only my own analysis, write-ups and diagrams.
 
 ## How these were made
 
