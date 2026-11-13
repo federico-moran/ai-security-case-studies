@@ -8,7 +8,7 @@ _One or two sentences about me, in my own words: who I am and what I do._
 
 | Case study | System | Methods | Course | Status |
 |---|---|---|---|---|
-| [Vroomi AI Assistant](vroomi/) | Internal LLM assistant that answers policy questions and books, cancels and lists rides | STRIDE threat model, OWASP Top 10 for LLM Applications (2026), live testing | AISF Level 1 capstone | In progress |
+| [Vroomi AI Assistant](vroomi/) | Internal LLM assistant that answers policy questions and books, cancels and lists rides | STRIDE threat model, OWASP Top 10 for LLM Applications (2026), live testing | AISF Level 1 capstone | Complete |
 
 ## Training: AI Security Fundamentals
 

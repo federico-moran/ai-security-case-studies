@@ -1,0 +1,59 @@
+%% Vroomi AI assistant, prototype: where the five tested findings sit (slide 2 of deck v3)
+%% Same components and flows as Vroomi_System_Diagram.mmd. Only findings confirmed by live tests are shown.
+%% Evidence: Technical_Report.md section 4 and Test_Log.md.
+%% VRM-05 is latent: the prototype never feeds trip history back to the model (tests simulated that planned step),
+%% so no TRIPS -> model flow is drawn.
+
+flowchart LR
+    subgraph USER["USER · UNTRUSTED"]
+        direction TB
+        EMP["Employee<br/>Types a request<br/>Only text is sent: no login, no identity"]
+        RESP["Response<br/>Model text, a tool result (e.g. every trip)<br/>or an error message"]
+    end
+
+    subgraph APP["VROOMI APP · TRUSTED CODE · ONE PYTHON PROCESS"]
+        direction TB
+        LLM["call_llm() · called by chat()"]
+        PROMPT[("SYSTEM_PROMPT · one fixed string<br/>incl. customer record DOC-004")]
+        EXEC["execute_tool() · called by chat()"]
+        TRIPS[("TRIPS list<br/>No owner on any trip")]
+    end
+
+    subgraph OPENAI["OPENAI · SEMI-TRUSTED"]
+        MODEL["gpt-4o-mini"]
+    end
+
+    EMP -- "1 request" --> LLM
+    PROMPT -. "instructions" .-> LLM
+    LLM -- "2 request + system prompt" --> MODEL
+    MODEL -- "3 reply text" --> LLM
+    LLM -- "4 chat() passes reply" --> EXEC
+    EXEC -- "5 tool call / result" --> TRIPS
+    EXEC -- "6 chat() returns result" --> RESP
+
+    V01["VRM-01 · Critical<br/>Customer record to anyone who asks<br/>T-001, T-002: 10/10"]
+    V02["VRM-02 · Critical<br/>Any employee cancels any trip; history lists all<br/>T-005, T-006: 10/10; T-007"]
+    V04["VRM-04 · High<br/>'Don't run it' still cancels the trip<br/>T-014: 10/10"]
+    V03["VRM-03 · Medium<br/>All four documents leak via a summary<br/>T-013: 10/10"]
+    V05["VRM-05 · Medium · latent<br/>Planted destination text reaches<br/>another employee's summary<br/>T-017: 10/10 (simulated agentic step)"]
+
+    PROMPT --- V01
+    PROMPT --- V03
+    EXEC --- V04
+    TRIPS --- V02
+    TRIPS --- V05
+    EMP -. "no identity: behind" .- V01
+    EMP -. "no identity: behind" .- V02
+
+    classDef untrusted fill:#FBE3E1,stroke:#B3261E,color:#1B2430
+    classDef trusted fill:#E3F2E8,stroke:#2E7D4F,color:#1B2430
+    classDef semi fill:#FBF3CF,stroke:#8A6D00,color:#1B2430
+    classDef critical fill:#A11D1D,stroke:#7A1414,color:#FDFDFB
+    classDef high fill:#E07B39,stroke:#A3541F,color:#1B2430
+    classDef medium fill:#F2C94C,stroke:#A88A1E,color:#1B2430
+    class EMP,RESP untrusted
+    class LLM,PROMPT,EXEC,TRIPS trusted
+    class MODEL semi
+    class V01,V02 critical
+    class V04 high
+    class V03,V05 medium

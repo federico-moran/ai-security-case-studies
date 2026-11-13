@@ -1,0 +1,39 @@
+%% Vroomi AI assistant, prototype (notebook supplied by Softmicro)
+%% Plain-text record of the system diagram. Matches the code as written: no inferred components.
+%% Pipeline: chat(request) = execute_tool(call_llm(request)). Tool results go to the user, never back to the model.
+%% Trust: user untrusted; app code and data trusted; OpenAI external (semi-trusted), its reply untrusted text.
+
+flowchart LR
+    subgraph USER["USER · UNTRUSTED"]
+        direction TB
+        EMP["Employee<br/>Types a request<br/>Only text is sent: no login, no identity"]
+        RESP["Response<br/>Model text, a tool result (e.g. every trip)<br/>or an error message"]
+    end
+
+    subgraph APP["VROOMI APP · TRUSTED CODE · ONE PYTHON PROCESS"]
+        direction TB
+        LLM["call_llm() · called by chat()<br/>Sends the request + whole system prompt;<br/>returns the reply text"]
+        PROMPT[("SYSTEM_PROMPT · one fixed string<br/>Rules · Tool JSON formats<br/>Policies DOC-001 to DOC-003<br/>Customer record DOC-004 (sensitivity: high)")]
+        EXEC["execute_tool() · called by chat()<br/>Reply starts with { (after code fences stripped):<br/>runs book_ride / cancel_ride / get_trip_history, no checks.<br/>Otherwise: returns the text"]
+        TRIPS[("TRIPS list<br/>In-memory, same process<br/>No owner on any trip<br/>IDs = len(TRIPS) + 1")]
+    end
+
+    subgraph OPENAI["OPENAI · SEMI-TRUSTED"]
+        MODEL["gpt-4o-mini<br/>OpenAI Responses API<br/>Reply is untrusted text"]
+    end
+
+    EMP -- "1 request (plain text)" --> LLM
+    PROMPT -. "instructions" .-> LLM
+    LLM -- "2 request + system prompt" --> MODEL
+    MODEL -- "3 reply text" --> LLM
+    LLM -- "4 chat() passes reply" --> EXEC
+    EXEC -- "5 tool call" --> TRIPS
+    TRIPS -- "5 result" --> EXEC
+    EXEC -- "6 chat() returns result" --> RESP
+
+    classDef untrusted fill:#FBE3E1,stroke:#B3261E,color:#1B2430
+    classDef trusted fill:#E3F2E8,stroke:#2E7D4F,color:#1B2430
+    classDef semi fill:#FBF3CF,stroke:#8A6D00,color:#1B2430
+    class EMP,RESP untrusted
+    class LLM,PROMPT,EXEC,TRIPS trusted
+    class MODEL semi
