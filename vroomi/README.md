@@ -6,12 +6,14 @@ Security assessment of Softmicro's Vroomi AI assistant prototype: an internal LL
 
 ## Deliverables
 
+The finished report is the four PDFs in [report/](report/). The Markdown, Mermaid and harness files beside it are the sources and evidence.
+
 | Document | For | Read |
 |---|---|---|
-| Technical report | Engineers who fix Vroomi: every finding with location, reproduction, fix and verification | [PDF](Vroomi_Technical_Report.pdf) · [Markdown](Technical_Report.md) |
-| Executive summary | The CISO: the decision on one page | [PDF](Vroomi_Executive_Summary.pdf) · [Markdown](Executive_Summary.md) |
-| Evidence appendix | Every prompt tested, with run counts and rates | [PDF](Vroomi_Evidence_Test_Log.pdf) · [Markdown](Test_Log.md) |
-| System diagram | How Vroomi works, and where each finding sits | [PDF](Vroomi_System_Diagram_v3.1.pdf) · Mermaid: [system](Vroomi_System_Diagram.mmd), [findings](Vroomi_Vulnerabilities.mmd) |
+| Technical report | Engineers who fix Vroomi: every finding with location, reproduction, fix and verification | [PDF](report/Vroomi_Technical_Report.pdf) · [Markdown](Technical_Report.md) |
+| Executive summary | The CISO: the decision in two pages | [PDF](report/Vroomi_Executive_Summary.pdf) · [Markdown](Executive_Summary.md) |
+| Evidence appendix | Every prompt tested, with run counts and rates | [PDF](report/Vroomi_Evidence_Test_Log.pdf) · [Markdown](Test_Log.md) |
+| System diagram | How Vroomi works, and where each finding sits | [PDF](report/Vroomi_System_Diagram.pdf) · Mermaid: [system](Vroomi_System_Diagram.mmd), [findings](Vroomi_Vulnerabilities.mmd) |
 | Test harness | Rerun every test and the defence comparison | [harness/](harness/) |
 
 ## Findings

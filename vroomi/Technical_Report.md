@@ -115,7 +115,7 @@ Severity = likelihood × impact, judged for **this** organisation and its plans 
 
 ### DFD elements
 
-Every element in the diagram, so §8's STRIDE table has one row per element. Rows match deck v3. The model is an external entity: a third-party service Softmicro neither controls nor sees inside, so its output is untrusted input. The knowledge base is part of the `SYSTEM_PROMPT` store, because in code it is one fixed string; VRM-03's fix splits it out.
+Every element in the diagram, so §8's STRIDE table has one row per element. Rows match the system diagram. The model is an external entity: a third-party service Softmicro neither controls nor sees inside, so its output is untrusted input. The knowledge base is part of the `SYSTEM_PROMPT` store, because in code it is one fixed string; VRM-03's fix splits it out.
 
 | Element | DFD type | Trust zone | Notes |
 |---|---|---|---|
@@ -154,7 +154,7 @@ Three ideas explain every finding in §4:
 
 The consequence: decisions about who may see or change what belong in code, before and after the model, never in the prompt.
 
-**Diagram:** live deck v3 <https://claude.ai/artifact/8dYsxCQuXSp3Xw4eYHKSAz> (slide 1: how Vroomi works; slide 2: where VRM-01 to VRM-05 sit). Plain-text records: [Vroomi_System_Diagram.mmd](Vroomi_System_Diagram.mmd) (system) and [Vroomi_Vulnerabilities.mmd](Vroomi_Vulnerabilities.mmd) (findings)
+**Diagram:** [Vroomi_System_Diagram.pdf](report/Vroomi_System_Diagram.pdf) (page 1: how Vroomi works; page 2: where VRM-01 to VRM-05 sit). Plain-text records: [Vroomi_System_Diagram.mmd](Vroomi_System_Diagram.mmd) (system) and [Vroomi_Vulnerabilities.mmd](Vroomi_Vulnerabilities.mmd) (findings)
 
 ---
 
@@ -611,7 +611,7 @@ Model output varies between runs, so compare rates with [Test_Log.md](Test_Log.m
 
 ### C. System diagram
 
-[Vroomi_System_Diagram_v3.1.pdf](Vroomi_System_Diagram_v3.1.pdf) (two slides; live deck with speaker notes: <https://claude.ai/artifact/8dYsxCQuXSp3Xw4eYHKSAz>). [Vroomi_System_Diagram.mmd](Vroomi_System_Diagram.mmd) and [Vroomi_Vulnerabilities.mmd](Vroomi_Vulnerabilities.mmd) (plain-text Mermaid).
+[Vroomi_System_Diagram.pdf](report/Vroomi_System_Diagram.pdf) (two pages: how Vroomi works, and where each finding sits). [Vroomi_System_Diagram.mmd](Vroomi_System_Diagram.mmd) and [Vroomi_Vulnerabilities.mmd](Vroomi_Vulnerabilities.mmd) (plain-text Mermaid).
 
 ### D. References
 
