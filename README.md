@@ -30,6 +30,10 @@ Course systems and lab notebooks belong to the course and are not reproduced her
 
 I used Claude (Anthropic) to help analyse the systems and create the assessments. The testing, findings and judgement are mine.
 
+## Licence
+
+Reports and diagrams are licensed under CC BY 4.0; code under MIT. See [LICENSE.md](LICENSE.md).
+
 ## Contact
 
 - GitHub: [@federico-moran](https://github.com/federico-moran)
