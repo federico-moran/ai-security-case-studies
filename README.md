@@ -36,4 +36,5 @@ Reports and diagrams are licensed under CC BY 4.0; code under MIT. See [LICENSE.
 
 ## Contact
 
+- LinkedIn: [Federico Moran](https://www.linkedin.com/in/fredmoran/)
 - GitHub: [@federico-moran](https://github.com/federico-moran)
