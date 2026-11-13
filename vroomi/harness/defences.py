@@ -12,8 +12,8 @@ Where the defence is a filtered knowledge base, the variant's own defended chat(
   D4  keyword block + high-sensitivity documents removed
 D5 (misinformation checks) is judged from its code in the report, not run here.
 
-Usage (from the report folder, with OPENAI_API_KEY set):
-    uv run python harness/defences.py [--runs N] [--only D1-T005 ...]
+Usage (from the harness folder, with OPENAI_API_KEY set):
+    uv run python defences.py [--runs N] [--only D1-T005 ...]
 """
 
 import argparse

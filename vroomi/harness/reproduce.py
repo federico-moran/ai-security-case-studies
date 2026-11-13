@@ -4,11 +4,11 @@ The harness loads the system cell straight from the supplied notebook, so it tes
 the exact code under review without copying or changing it. Section 10 of that
 cell (the demo "Cancel trip 2" call) is cut off before running.
 
-Usage (from the report folder, with OPENAI_API_KEY set):
-    uv run python harness/reproduce.py --list
-    uv run python harness/reproduce.py                    # every test, logged run counts
-    uv run python harness/reproduce.py --only T-005 T-006 # some tests
-    uv run python harness/reproduce.py --only T-014 --runs 3
+Usage (from the harness folder, with OPENAI_API_KEY set):
+    uv run python reproduce.py --list
+    uv run python reproduce.py                    # every test, logged run counts
+    uv run python reproduce.py --only T-005 T-006 # some tests
+    uv run python reproduce.py --only T-014 --runs 3
 
 Each run prints one line per attempt and a rate per test, then saves every full
 output to harness/results/<timestamp>.json. Rates vary between runs

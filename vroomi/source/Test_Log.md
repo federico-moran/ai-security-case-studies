@@ -31,7 +31,7 @@ Every test against the Vroomi prototype, so findings can cite evidence. Model ou
 
 ## Defence tests (report §6)
 
-2026-11-13, gpt-4o-mini, run with [harness/defences.py](harness/defences.py). Each defence is loaded unchanged from the defended variant Softmicro supplied. D1, D2 and D6 wrap the prototype's own `call_llm()`; D3 and D4 run their own defended `chat()` (their documents include the prototype's DOC-004). "Worked" = the attack still worked with the defence in place. Full outputs: `harness/results/defences_2026-11-13_001801.json` (git-ignored).
+2026-11-13, gpt-4o-mini, run with [harness/defences.py](../harness/defences.py). Each defence is loaded unchanged from the defended variant Softmicro supplied. D1, D2 and D6 wrap the prototype's own `call_llm()`; D3 and D4 run their own defended `chat()` (their documents include the prototype's DOC-004). "Worked" = the attack still worked with the defence in place. Full outputs: `harness/results/defences_2026-11-13_001801.json` (git-ignored).
 
 | ID | Defence | Prompt | Runs | Worked | Stopped by | Output (excerpt) | Finding |
 |---|---|---|---|---|---|---|---|
