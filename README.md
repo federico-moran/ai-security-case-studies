@@ -12,10 +12,10 @@ I'm a cybersecurity engineer with extensive IT experience behind me. My main are
 
 ## Training: AI Security Fundamentals
 
-Several case studies here come from [**AI Security Fundamentals (AISF)**](https://aisecurityfundamentals.com/curriculum), a three-level training programme from [Mileva Security Labs](https://www.milev.ai/fundamentals).
+Several case studies here come from [**AI Security Fundamentals (AISF)**](https://aisecurityfundamentals.com/curriculum), a three-level training program from [Mileva Security Labs](https://www.milev.ai/fundamentals).
 
-- **[Level 1: Foundation](https://www.milev.ai/fundamentals)**: practical AI threat modelling, attacks, defences, governance and applied assessment, with hands-on technical exercises. Open to professionals in any field.
-- **[Level 2: Strategic](https://www.milev.ai/level2)**: integrating AI security into governance, procurement and organisational risk management. Designed for CISOs, risk managers and leaders.
+- **[Level 1: Foundation](https://www.milev.ai/fundamentals)**: practical AI threat modeling, attacks, defenses, governance and applied assessment, with hands-on technical exercises. Open to professionals in any field.
+- **[Level 2: Strategic](https://www.milev.ai/level2)**: integrating AI security into governance, procurement and organizational risk management. Designed for CISOs, risk managers and leaders.
 - **[Level 3: Practitioner](https://www.milev.ai/level3)**: advanced technical AI security, covering adversarial machine learning, simulated attacks on AI systems and building defensive tools. For cyber and AI security professionals; builds on Level 1.
 
 | Level | Status | Case studies |
@@ -28,9 +28,9 @@ Course systems and lab notebooks belong to the course and are not reproduced her
 
 ## How these were made
 
-I used Claude (Anthropic) to help analyse the systems and create the assessments. The testing, findings and judgement are mine.
+I used Claude (Anthropic) to help analyze the systems and create the assessments. The testing, findings and judgment are mine.
 
-## Licence
+## License
 
 Reports and diagrams are licensed under CC BY 4.0; code under MIT. See [LICENSE.md](LICENSE.md).
 

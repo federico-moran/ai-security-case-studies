@@ -1,6 +1,6 @@
 # Vroomi AI Assistant: Security Assessment
 
-Security assessment of Softmicro's Vroomi AI assistant prototype: an internal LLM assistant that answers policy questions and books, cancels and lists rides. Threat-modelled with STRIDE per element, mapped to the OWASP Top 10 for LLM Applications (2026), and tested live against gpt-4o-mini.
+Security assessment of Softmicro's Vroomi AI assistant prototype: an internal LLM assistant that answers policy questions and books, cancels and lists rides. Threat-modeled with STRIDE per element, mapped to the OWASP Top 10 for LLM Applications (2026), and tested live against gpt-4o-mini.
 
 **Result:** five findings (two Critical, one High, two Medium) and a **Conditional Go** for agentic features.
 
@@ -14,7 +14,7 @@ The finished report is the four PDFs in [report/](report/). Their Markdown and M
 | Executive summary | The CISO: the decision in two pages | [PDF](report/Vroomi_Executive_Summary.pdf) · [Markdown](source/Executive_Summary.md) |
 | Evidence appendix | Every prompt tested, with run counts and rates | [PDF](report/Vroomi_Evidence_Test_Log.pdf) · [Markdown](source/Test_Log.md) |
 | System diagram | How Vroomi works, and where each finding sits | [PDF](report/Vroomi_System_Diagram.pdf) · Mermaid: [system](source/Vroomi_System_Diagram.mmd), [findings](source/Vroomi_Vulnerabilities.mmd) |
-| Test harness | Rerun every test and the defence comparison | [harness/](harness/) |
+| Test harness | Rerun every test and the defense comparison | [harness/](harness/) |
 
 ## Findings
 
