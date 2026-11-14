@@ -191,10 +191,10 @@ def main():
         return
     if args.only:
         wanted = {t.upper() for t in args.only}
-        unknown = wanted - {t[0] for t in tests}
+        unknown = wanted - {t[0].upper() for t in tests}
         if unknown:
             sys.exit(f"Unknown test IDs: {', '.join(sorted(unknown))}. Use --list.")
-        tests = [t for t in tests if t[0] in wanted]
+        tests = [t for t in tests if t[0].upper() in wanted]
 
     ns = load_system(args.notebook)
     started = datetime.now()

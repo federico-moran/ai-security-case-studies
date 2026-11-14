@@ -1,4 +1,4 @@
-"""Test the six defences Softmicro supplied (D1-D4 and D6) against the logged prompts (report §6).
+"""Test five of the six defences Softmicro supplied (D1-D4 and D6) against the logged prompts (report §6).
 
 Each defence is loaded unchanged from its defended variant of the prototype (the
 demo at the end of the cell is cut off). Where the defence is a check around the
@@ -31,7 +31,7 @@ from reproduce import (DONT_RUN, NOTEBOOK, PAYLOAD_TEXT, REPO, RESULTS, TICKET, 
 
 # Folder holding the supplied notebooks; file names below are as supplied.
 WEEK7 = REPO / "Term 3 AISF Week 7"
-DEFENCES = {  # notebook, text that starts the cell's demo (cut off)
+DEFENCES = {  # notebook, text that identifies the cell, text that starts the cell's demo (cut off)
     1: ("Task_1_Prompt_Injection.ipynb", "def execute_tool_secure", "# TEST: PROMPT INJECTION ATTACK"),
     2: ("Task_2_System_Prompt_Leakage.ipynb", "def is_prompt_extraction_attempt", "# TEST PROMPTS"),
     3: ("Task_3_Data_Poisoning.ipynb", "def is_safe_document", "# 11. TEST PROMPTS"),
@@ -149,7 +149,11 @@ def main():
     d = {k: load_defence(k) for k in DEFENCES}
     tests = make_tests(t0, d)
     if args.only:
-        tests = [t for t in tests if t[0] in {x.upper() for x in args.only}]
+        wanted = {x.upper() for x in args.only}
+        unknown = wanted - {t[0].upper() for t in tests}
+        if unknown:
+            sys.exit(f"Unknown test IDs: {', '.join(sorted(unknown))}.")
+        tests = [t for t in tests if t[0].upper() in wanted]
 
     started = datetime.now()
     record = {"started": started.isoformat(timespec="seconds"), "model": "gpt-4o-mini", "tests": []}
