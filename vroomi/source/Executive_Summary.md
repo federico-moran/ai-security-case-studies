@@ -18,7 +18,7 @@ An AI assistant Softmicro employees use to book, cancel and review rides for sta
 
 ## What we tested
 
-The Vroomi prototype's design and code, threat-modelled and assessed against the OWASP Top 10 for LLM Applications (2026), plus 19 attacks run live against the AI model, most of them 10 times, between 20 October and 8 November 2026. The tests used one model and a simulated booking store; the agentic risk was tested by simulating the planned feature.
+The Vroomi prototype's design and code, threat-modelled and assessed against the OWASP Top 10 for LLM Applications (2026), plus 19 tests run live against the AI model, most of them 10 times, between 20 October and 8 November 2026. The tests used one model and a simulated booking store; the agentic risk was tested by simulating the planned feature.
 
 ## Top risks
 

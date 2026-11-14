@@ -39,7 +39,7 @@ For engineering leads. The CISO's version is [Executive_Summary.md](Executive_Su
 
 ### In scope
 - The Vroomi prototype: `SYSTEM_PROMPT` (rules, tool formats and the knowledge base, DOC-001 to DOC-004), `call_llm()`, `execute_tool()` and its three tools, `TRIPS`, and `chat()`
-- Six defended variants of the prototype supplied by Softmicro, each adding one defence, tested against the same attacks (§6)
+- Six defended variants of the prototype supplied by Softmicro, each adding one defence: five tested against the same attacks, D5 judged from its code (§6)
 
 ### Out of scope
 - OpenAI's infrastructure and the model itself
@@ -54,7 +54,7 @@ Written for the engineers who build and fix Vroomi, including builders still lea
 - **Threat modelling:** STRIDE-per-element over the data flow diagram in §3 (see Method below)
 - **Code review:** read each component and wrote down what it assumes, then tested each assumption
 - **Live testing:** prompts against the running system, logged in [Test_Log.md](Test_Log.md); most run 10 times because model output varies
-- **Defence comparison:** the six supplied defences, tested with the logged prompts (§6)
+- **Defence comparison:** five of the six supplied defences tested with the logged prompts; D5 judged from its code (§6)
 
 ### Method
 
@@ -154,7 +154,7 @@ Three ideas explain every finding in §4:
 
 The consequence: decisions about who may see or change what belong in code, before and after the model, never in the prompt.
 
-**Diagram:** [Vroomi_System_Diagram.pdf](../report/Vroomi_System_Diagram.pdf) (page 1: how Vroomi works; page 2: where VRM-01 to VRM-05 sit). Plain-text records: [Vroomi_System_Diagram.mmd](Vroomi_System_Diagram.mmd) (system) and [Vroomi_Vulnerabilities.mmd](Vroomi_Vulnerabilities.mmd) (findings)
+**Diagram:** [Vroomi_System_Diagram.pdf](../report/Vroomi_System_Diagram.pdf) (page 1: how Vroomi works; page 2: where VRM-01 to VRM-05 sit). Plain-text records: [Vroomi_System_Diagram.mmd](Vroomi_System_Diagram.mmd) (system) and [Vroomi_Vulnerabilities.mmd](Vroomi_Vulnerabilities.mmd) (findings).
 
 ---
 
@@ -170,7 +170,7 @@ Findings are ordered most severe first. IDs follow the order in which issues wer
 | **Component** | `SYSTEM_PROMPT` (DOC-004, the customer record); `chat()` (no identity check) |
 | **Location** | Vroomi prototype notebook › system cell › §6 `SYSTEM_PROMPT`: `4. Customer Record (DOC-004)` `Customer: Jane Smith, Account ID: 98765, Issue: billing error, flagged for review.` `(trust: high, sensitivity: high)`; §7 `call_llm`: `instructions=SYSTEM_PROMPT`; §9 `def chat(user_input):` (no user identity) |
 | **STRIDE** | Information disclosure |
-| **References** | OWASP LLM02:2026 (LLM02:2025), Sensitive Information Disclosure; CWE-359 (Exposure of Private Personal Information); AML.T0085.002 Data from AI Services: Conversation Context and Memory (MITRE ATLAS v2026.10) |
+| **References** | OWASP LLM02:2026 (LLM02:2025), Sensitive Information Disclosure; CWE-359 (Exposure of Private Personal Information to an Unauthorized Actor); AML.T0085.002 Data from AI Services: Conversation Context and Memory (MITRE ATLAS v2026.10) |
 | **Status** | Open |
 
 **Description:** Any user can get a customer's record (name, account ID and billing issue) by asking for it in plain language, with or without a pretext, in 10 out of 10 runs. The record sits in the system prompt and is sent to the model with every request. It is labelled `sensitivity: high`, but nothing in the code acts on that label, and Vroomi doesn't know who is asking, so the model alone decides who sees it.
@@ -554,7 +554,7 @@ The 2026 LLM guide says that once a model acts (calls tools, carries memory, set
 - **Forged knowledge-base documents (untested):** the documents and the user's message are both plain text, so a user could paste text styled as an internal document, with a forged `(trust: high)` label, to change a policy answer or trigger an action. OWASP LLM01:2026 (LLM01:2025); LLM07:2026 (LLM09:2025) if it changes policy answers.
 - **Invented tool names (observed, Low):** in T-004 the model called tools it was never given (`support_ticket`, `create_support_ticket`, `submit_support_ticket`). `execute_tool()` rejects them today; a future tool with a matching name would run unprompted. OWASP LLM03:2026 (LLM06:2025). Covered by VRM-04 step 3.
 - **Error messages reveal internals (observed, Low):** users saw `Unknown tool requested: create_support_ticket` (T-003), and `execute_tool()` returns raw exception text (`Error handling model output: {e}`). Covered by VRM-04 step 3.
-- **Model change:** every rate here is for gpt-4o-mini, which leaves OpenAI's API on 2027-01-14 according to reports of OpenAI's deprecation notice. Rerun the harness (Appendix A) after any model change.
+- **Model change:** every rate here is for gpt-4o-mini, which leaves OpenAI's API on 2027-01-14 according to OpenAI's deprecations page (Appendix D). Rerun the harness (Appendix A) after any model change.
 
 ### Risks as the system becomes more autonomous
 - **More data read back, more instructions:** today the model reads one fixed prompt. Agentic features add trip history, and later perhaps tickets or emails; each record becomes a possible instruction (VRM-05).
@@ -569,7 +569,7 @@ The 2026 LLM guide says that once a model acts (calls tools, carries memory, set
 
 **Decision:** Conditional Go. No agentic features until the conditions below are met. The low-effort fixes (§7, steps 1 to 3) should ship now regardless.
 
-**Justification:** two Critical findings need no skill: any user can read a customer's record (VRM-01) and any employee can cancel anyone's trip without a trace (VRM-02). Agentic features would build on exactly these gaps: more tools that run unchecked (VRM-04), more stored data the model reads as instructions (VRM-05). The model already followed a planted cancel instruction in every run; only a parsing accident stopped it. None of the fixes is novel, and testing the six supplied defences showed that the code-level ones work (§6).
+**Justification:** two Critical findings need no skill: any user can read a customer's record (VRM-01) and any employee can cancel anyone's trip without a trace (VRM-02). Agentic features would build on exactly these gaps: more tools that run unchecked (VRM-04), more stored data the model reads as instructions (VRM-05). The model already followed a planted cancel instruction in every run; only a parsing accident stopped it. None of the fixes is novel, and testing the supplied defences showed that the code-level ones work (§6).
 
 Conditions, each met when the matching **Verification** in §4 passes:
 
@@ -601,7 +601,7 @@ uv run python reproduce.py                     # every test (about 160 model cal
 uv run python reproduce.py --only T-013 T-014  # some tests
 ```
 
-The supplied defences in §6 are tested the same way with [harness/defences.py](../harness/defences.py) (`uv run python defences.py`, about 200 model calls).
+The supplied defences in §6 are tested the same way with [harness/defences.py](../harness/defences.py) (`uv run python defences.py`, about 140 model calls).
 
 Model output varies between runs, so compare rates with [Test_Log.md](Test_Log.md) rather than expecting exact matches. T-017 to T-019 simulate a planned agentic step (trip history fed back to the model) that the prototype doesn't have; see VRM-05.
 
@@ -621,6 +621,7 @@ Model output varies between runs, so compare rates with [Test_Log.md](Test_Log.m
 - MITRE ATLAS, release v2026.10 (technique and mitigation IDs cited in each finding): <https://atlas.mitre.org/>
 - MITRE CWE: CWE-200, CWE-359, CWE-639, CWE-862, CWE-1426, CWE-1427, CWE-79, at `https://cwe.mitre.org/data/definitions/<number>.html`
 - OpenAI, function calling (structured tool calls, VRM-04's fix): <https://platform.openai.com/docs/guides/function-calling>
+- OpenAI, deprecations: <https://platform.openai.com/docs/deprecations>
 - Adam Shostack, *Threat Modeling: Designing for Security* (Wiley, 2014)
 
 ### E. Glossary
