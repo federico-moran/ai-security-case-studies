@@ -2,7 +2,7 @@
 
 Security assessments of LLM applications and AI agents: threat models, measured test results and remediation guidance written for the people who build and fix these systems.
 
-_One or two sentences about me, in my own words: who I am and what I do._
+I'm a cybersecurity engineer with extensive IT experience behind me. My main areas are Active Directory and identity management, vulnerability management, threat hunting, incident response and automation, but I've worked across a lot of other technical areas too. Lately I've been moving into AI security, and these case studies are where I test LLM applications and agents and write up what I find.
 
 ## Case studies
 
